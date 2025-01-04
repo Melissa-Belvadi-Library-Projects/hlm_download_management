@@ -5,7 +5,7 @@ import re
 
 def clean_line(line):
     # Remove all single quotes, double quotes, and apostrophes
-    line = line.replace('"', '').replace("'", '').replace("`", '')
+    #line = line.replace('"', '').replace("'", '').replace("`", '')
     return line
 
 def clean_isbn(isbn):
