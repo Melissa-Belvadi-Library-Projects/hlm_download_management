@@ -1,0 +1,38 @@
+Basic instructions for installing Python on a Windows 11 computer
+
+Install Python 3:
+
+Go to the official Python website. [Python downloads](https://www.python.org/downloads/)
+Download the latest version of Python 3.
+Run the installer. Make sure to check the box "Add Python to PATH" during installation.
+To verify the installation, open Command Prompt and run:
+**python --version**
+
+Install Required Packages:
+
+This python script will require you to also install some free add-on packages. Some of these will come by default with python itself, but you should check for each:
+* sys
+* os
+* sqlite3
+* re
+
+To install an add-on package, use pip3, which comes with Python. For example, to install the SQLite library, at your command prompt:
+**pip3 install sqlite3**
+If it is already included in your installation of python, this will just check and confirm that.
+
+Install SQLite3 Command Line Interpreter (optional):
+
+Download it from SQLite website. [SQLite command line interpreter](https://www.sqlite.org/download.html)
+Download the Windows package (a .zip file) and extract it.
+Place the sqlite3.exe file in a directory of your choice.
+Add that directory to your system's PATH environment variable to run it from Command Prompt easily.
+
+If you plan to only use a graphical interface to your HLM database, you don't need the command line interpreter.
+The provided python script does everything to create the sqlite database, tables, and indexes, for you.
+
+Install DBeaver - a free sql graphical frontend (optional)
+Dbeaver is one of many free graphical programs you can use to work with any sqlite database such as the one created by this python script.
+To get Dbeaver for Windows, go to:
+[Dbeaver home page](https://dbeaver.com/docs/dbeaver/)
+To learn more about using Dbeaver specifically with an SQLite database, see:
+[Dbeaver and SQLite](https://dbeaver.com/docs/dbeaver/Database-driver-SQLite/)
