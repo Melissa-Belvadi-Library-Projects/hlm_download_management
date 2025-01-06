@@ -1,0 +1,31 @@
+Mac OSX installation of python, sqlite, and Dbeaver
+
+Your Mac OSX computer probably has python already installed.
+To check, open your terminal and run this:
+python3 --version
+
+If you don't have it, you can get it (free) from:
+https://www.python.org/downloads/
+
+To install any required packages, use:
+pip3 install sqlite3
+or whatever package you need.
+If you already have that package, pip3 will tell you that.
+
+You might also already have the sqlite3 command line interpreter (optional).
+to check, run in terminal:
+sqlite3 --version
+
+If you don't have it but you do use homebrew, you can get it with:
+brew install sqlite3
+
+or get it directly from the SQLite website:
+https://www.sqlite.org/download.html
+
+If you plan to do everything in a graphical front end like DBeaver, you don't need the sqlite command line interpreter, but it can be nice to have.
+Melissa recommends the free Dbeaver graphical package.
+
+https://dbeaver.com/download/lite/
+
+Documentation about using DBeaver specifically with an sqlite database is:
+https://dbeaver.com/docs/dbeaver/Database-driver-SQLite/
