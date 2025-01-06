@@ -6,7 +6,7 @@ Go to the official Python website. [Python downloads](https://www.python.org/dow
 Download the latest version of Python 3.
 Run the installer. Make sure to check the box "Add Python to PATH" during installation.
 To verify the installation, open Command Prompt and run:
-**python --version**
+python --version
 
 Install Required Packages:
 
@@ -17,7 +17,7 @@ This python script will require you to also install some free add-on packages. S
 * re
 
 To install an add-on package, use pip3, which comes with Python. For example, to install the SQLite library, at your command prompt:
-**pip3 install sqlite3**
+pip3 install sqlite3
 If it is already included in your installation of python, this will just check and confirm that.
 
 Install SQLite3 Command Line Interpreter (optional):
