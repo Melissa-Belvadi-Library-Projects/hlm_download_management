@@ -45,6 +45,16 @@ WHERE CallNumber IS NOT NULL AND
 --- Simple count of resource types (eg book, journal, video, etc.
 select resourcetype, count(resourcetype) from main group by resourcetype;
 
+--- find titles that are in 3 or more packages using kbid, creating a single column for all matching packages, separated by pipe
+SELECT kbid, title,
+    GROUP_CONCAT(PackageName, '|') AS PackageNames,
+    ManagedCoverageBegin
+FROM main
+WHERE 
+    kbid IN (   SELECT kbid   FROM main   GROUP BY kbid   HAVING COUNT(DISTINCT PackageName) >= 3  )
+GROUP BY kbid, title, ManagedCoverageBegin
+ORDER BY  kbid;
+
 --- sample script showing join between main and kbid_isbn table
 --- Finding holdings records that have neither a subject heading nor a "CallNumber" (actually UserDefinedField5, that UPEI uses to store LC call numbers)
 --- but do have at least one ISBN, so hopefully are books
@@ -56,6 +66,25 @@ where m.subject = ''
 and m.CallNumber = '' and 
 (not m.OnlineISBN  = '' or not m.PrintISBN = '')
 and not ki.kbid is null
+
+--- Find matches between all Proquest packages and all EBSCO packages, trying first by kbid and then by ISBN if no kbid match
+---- Find matches between Proquest and EBSCO using kbid
+----- If you want to compare specific packages, in both selects change the PackageNames to their exact names instead of using the % wildcards
+SELECT  distinct p.title, p.ManagedCoverageBegin, p.PackageName Proquest_Packagename, p.kbid Proquest_KBID,  e.kbid EBSCO_kbid,
+e.PackageName EBSCO_PackageName,'Unused' ISBN
+FROM main p
+JOIN main e on (e.kbid = p.kbid)
+WHERE p.PackageName LIKE '%Proquest%' AND e.PackageName LIKE '%EBSCO%'
+UNION
+--- Find matches between Proquest and EBSCO using isbn when no kbid match
+SELECT  distinct p.title, p.ManagedCoverageBegin, p.PackageName Proquest_Packagename, p.kbid Proquest_KBID,  e.kbid EBSCO_kbid,  
+e.PackageName EBSCO_PackageName, kp.isbn
+FROM main p
+JOIN kbid_isbns kp ON (kp.kbid = p.kbid)
+JOIN kbid_isbns  ke ON (ke.isbn = kp.isbn)
+JOIN main e on (e.kbid = ke.kbid)
+WHERE p.PackageName LIKE '%Proquest%' AND e.PackageName LIKE '%EBSCO%'
+and p.kbid != e.kbid order by p.title, Proquest_KBID, ISBN;
 
 --- a demonstration of using max with a field - can be useful to make sure you only get one output line per value in that column;
 --- this also includes limiting to books published this century
