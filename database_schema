@@ -11,6 +11,7 @@ In the case of "main", there should only ever be one pairing of a resource (kbid
 
 kbid works as a reliable "join" relational field. Some resources won't have any isbn, or not have any subjects, so consider using "left join" rather than a full "join" if data from "main" is your primary goal.
 
+Note that if EBSCO adds more columns to the HLM download output, you will get them all using the py script, and the "create table main" as defined below will not be complete. Updated as of June 13, 2025.
 
 -- kbid_isbns definition
 
@@ -30,7 +31,7 @@ CREATE INDEX idx_kbid_subjects_subject ON kbid_subjects (Subject);
 
 -- main definition
 
-CREATE TABLE main ("KBID" TEXT, "Title" TEXT, "AlternateTitle" TEXT, "PackageName" TEXT, "URL" TEXT, "ProxiedURL" TEXT, "Publisher" TEXT, "Edition" TEXT, "Author" TEXT, "Editor" TEXT, "Illustrator" TEXT, "PrintISSN" TEXT, "OnlineISSN" TEXT, "PrintISBN" TEXT, "OnlineISBN" TEXT, "DOI" TEXT, "PeerReviewed" TEXT, "ManagedCoverageBegin" TEXT, "ManagedCoverageEnd" TEXT, "CustomCoverageBegin" TEXT, "CustomCoverageEnd" TEXT, "CoverageStatement" TEXT, "Embargo" TEXT, "CustomEmbargo" TEXT, "Description" TEXT, "Subject" TEXT, "ResourceType" TEXT, "PackageContentType" TEXT, "CreateCustom" TEXT, "HideOnPublicationFinder" TEXT, "HideOnFullTextFinder" TEXT, "ExcludeFromMARC" TEXT, "Delete" TEXT, "OrderedThroughEBSCO" TEXT, "IsCustom" TEXT, "StaffOnlyNotes" TEXT, "OtherInfoAboutThisTitle" TEXT, "SpecialNotesAboutParticularVolumes" TEXT, "UPEIAccessNote" TEXT, "CallNumber" TEXT, "SmartLinksPlus_Eligible" TEXT, "PackageType" TEXT, "AllowEBSCOtoSelectNewTitles" TEXT, "PackageID" TEXT, "VendorName" TEXT, "VendorID" TEXT, "Absorbed" TEXT, "Continued" TEXT, "Continued_in_part" TEXT, "Merged" TEXT, "Split" TEXT);
+CREATE TABLE main ("KBID" TEXT, "Title" TEXT, "AlternateTitle" TEXT, "PackageName" TEXT, "URL" TEXT, "ProxiedURL" TEXT, "Publisher" TEXT, "Edition" TEXT, "Author" TEXT, "Editor" TEXT, "Illustrator" TEXT, "PrintISSN" TEXT, "OnlineISSN" TEXT, "PrintISBN" TEXT, "OnlineISBN" TEXT, "DOI" TEXT, "PeerReviewed" TEXT, "ManagedCoverageBegin" TEXT, "ManagedCoverageEnd" TEXT, "CustomCoverageBegin" TEXT, "CustomCoverageEnd" TEXT, "CoverageStatement" TEXT, "Embargo" TEXT, "CustomEmbargo" TEXT, "Description" TEXT, "BISAC" TEXT, "General" TEXT, "LC" TEXT, "Medical" TEXT, "ResourceType" TEXT, "PackageContentType" TEXT, "CreateCustom" TEXT, "HideOnPublicationFinder" TEXT, "HideOnFullTextFinder" TEXT, "ExcludeFromMARC" TEXT, "Delete" TEXT, "OrderedThroughEBSCO" TEXT, "IsCustom" TEXT, "StaffOnlyNotes" TEXT, "OtherInfoAboutThisTitle" TEXT, "SpecialNotesAboutParticularVolumes" TEXT, "UPEIAccessNote" TEXT, "CallNumber" TEXT, "SmartLinksPlus_Eligible" TEXT, "PackageType" TEXT, "AllowEBSCOtoSelectNewTitles" TEXT, "PackageID" TEXT, "PackageDisplayName" TEXT, "ManagedPackageAlternateName" TEXT, "CustomPackageAlternateName" TEXT, "PackageDefaultURL" TEXT, "ProxiedPackageURL" TEXT, "PackageAccess" TEXT, "VendorName" TEXT, "VendorID" TEXT, "Absorbed" TEXT, "Continued" TEXT, "Continued_in_part" TEXT, "Merged" TEXT, "Split" TEXT);
 
 CREATE UNIQUE INDEX idx_kbid_packagename ON main (KBID, PackageName);
 CREATE INDEX idx_Title ON main (Title);
